@@ -1,0 +1,20 @@
+[
+  {
+    "name": "naresh",
+    "initialPositionX": 770,
+    "initialPositionY": 400,
+    "speed": "30",
+    "direction": "Towards",
+    "scenario": "Scenario 2",
+    "id": "1"
+  },
+  {
+    "name": "nani",
+    "initialPositionX": "500",
+    "initialPositionY": "350",
+    "speed": "50",
+    "direction": "Upwards",
+    "scenario": "Scenario 2",
+    "id": "2"
+  }
+]

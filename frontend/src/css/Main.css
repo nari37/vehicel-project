@@ -1,0 +1,11 @@
+.side{
+    background-color: #6c7f7f;
+    color: black;
+}
+.side ul li{
+    padding: 0.5rem;
+}
+.side ul li:hover{
+    background-color: rgb(200, 210, 219);
+    color: rgb(15, 130, 180);
+}

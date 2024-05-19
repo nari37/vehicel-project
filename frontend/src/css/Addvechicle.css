@@ -1,0 +1,80 @@
+.AddVehicle {
+    padding: 20px;
+    height: 100%;
+  }
+  .AddVehicle p{
+    margin-top: -20px;
+  }
+  .AddVehicle h2 {
+  margin-left: 0px;
+   
+   
+  }
+  
+  .AddVehicle .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0.7rem;
+    background-color: rgb(50, 49, 49);
+  }
+  
+  .AddVehicle .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .AddVehicle label {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    
+  }
+  
+  .AddVehicle input, .AddVehicle select {
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #dacece;
+    border-radius: 4px;
+    background-color:  #333;
+    color: #dacece;
+  }
+  
+  .AddVehicle .button-container {
+    display: flex;
+   float: left;
+   gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .AddVehicle button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .AddVehicle .button-container #back{
+    background-color: rgb(7, 85, 111);   
+  }
+  .AddVehicle .button-container #reset{
+    background-color: rgba(252, 115, 23, 0.914);
+  }
+  /* .AddVehicle .button-container #reset{
+    background-color: rgba(252, 115, 23, 0.914);
+  } */
+
+  
+  
+  .AddVehicle button[type="button"] {
+    background-color: #6c757d;
+  }
+  
+  .AddVehicle button[type="button"]:hover {
+    background-color: #5a6268;
+  }
+  
