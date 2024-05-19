@@ -9,7 +9,7 @@
 
 const serverconfig = () => {
     let hostname = window.location.hostname === 'localhost' ? 
-                   'http://localhost:5000' : 
+                   'http://localhost:5002' : 
                    `${window.location.protocol}//${window.location.hostname}`;
     
     return hostname;
