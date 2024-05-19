@@ -13,10 +13,12 @@ express.static('client')
 
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.static('client'))
-app.use(express.static('client/static'))
+// app.use(express.static('client'))
+// app.use(express.static('client/static'))
 
-app.use('/',express.static(Path.join(__dirname,'client')))
+// app.use('/',express.static(Path.join(__dirname,'client')))
+
+app.use(express.static(Path.join(__dirname, '../client/static')));
 
 const readData = async (filename) => {
     try {
