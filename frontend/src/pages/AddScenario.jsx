@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import '../css/AddSenarios.css';
 import { useNavigate } from 'react-router-dom';
-
+import  serverconfig from '../config/index.js';
 export default function AddScenario({setActiveLink}) {
   const [scenarioName, setScenarioName] = useState('');
   const [scenarioTime, setScenarioTime] = useState('');
@@ -23,7 +23,7 @@ export default function AddScenario({setActiveLink}) {
 
     
 
-    fetch('http://localhost:5000/api/scenarios', {
+    fetch(`${serverconfig()}/api/scenarios`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

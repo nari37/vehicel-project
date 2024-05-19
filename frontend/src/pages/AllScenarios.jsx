@@ -4,6 +4,8 @@ import '../css/AllScenarios.css';
 import { MdModeEditOutline } from 'react-icons/md';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { FaCirclePlus } from "react-icons/fa6";
+import  serverconfig from '../config/index.js';
+
 
 export default function AllScenarios({ setActiveLink }) {
   const [scenarios, setScenarios] = useState([]);
@@ -13,12 +15,12 @@ export default function AllScenarios({ setActiveLink }) {
   const [editedScenario, setEditedScenario] = useState({ id: '', name: '', time: '' });
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/scenariosnames')
+    fetch(`${serverconfig()}/api/scenariosnames`)
       .then(response => response.json())
       .then(data => setScenarios(data))
       .catch(error => console.error('Error fetching scenarios:', error));
 
-    fetch('http://localhost:5000/api/vehicle-names')
+    fetch(`${serverconfig()}/api/vehicle-names`)
       .then(response => response.json())
       .then(data => setVehicles(data))
       .catch(error => console.error('Error fetching vehicles:', error));
@@ -48,7 +50,7 @@ export default function AllScenarios({ setActiveLink }) {
 
   const handleSave = () => {
     const editedScenarioId = editedScenario.id;
-    fetch(`http://localhost:5000/api/update-scenarios/${editedScenarioId}`, {
+    fetch(`${serverconfig()}/api/update-scenarios/${editedScenarioId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -89,7 +91,7 @@ export default function AllScenarios({ setActiveLink }) {
     const updatedScenarios = scenarios.filter(scenario => scenario.id !== id);
     setScenarios(updatedScenarios);
 
-    fetch(`http://localhost:5000/api/scenariosDelete/${id}`, { method: 'DELETE' })
+    fetch(`${serverconfig()}/api/scenariosDelete/${id}`, { method: 'DELETE' })
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to delete scenario');

@@ -270,6 +270,7 @@ import React, { useState, useEffect } from 'react';
 import '../css/Home.css';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { MdModeEditOutline } from 'react-icons/md';
+import  serverconfig from '../config/index.js';
 
 const Home = () => {
   const [selectedScenario, setSelectedScenario] = useState('');
@@ -282,7 +283,7 @@ const Home = () => {
 
   useEffect(() => {
         // Fetch scenario names from the JSON server
-        fetch('http://localhost:5000/api/scenariosnames')
+        fetch(`${serverconfig()}/api/scenariosnames`)
           .then(response => response.json())
           .then(data => {
             Setscenarios(data);
@@ -294,7 +295,7 @@ const Home = () => {
 
   useEffect(() => {
         
-        fetch('http://localhost:5000/api/vehicle-names')
+        fetch(`${serverconfig()}/api/vehicle-names`)
           .then(response => response.json())
           .then(data => setVehicles(data))
           .catch(error => console.error('Error fetching data:', error));
@@ -400,7 +401,7 @@ const handleSaveClick = () => {
   setEditingId(null); // Set editingId to null after updating
 
   // Make a PUT request to update the data on the server
-  fetch(`http://localhost:5000/api/update-vehicle-data/${idToUpdate}`, {
+  fetch(`${serverconfig()}/api/update-vehicle-data/${idToUpdate}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -432,7 +433,7 @@ const handleSaveClick = () => {
 //  delete function....
 const deleteVehicleFromJson = (id) => {
   // Send a request to server to delete vehicle from JSON file
-  fetch(`http://localhost:5000/api/delete-vehicle/${id}`, {
+  fetch(`${serverconfig()}/api/delete-vehicle/${id}`, {
     method: 'DELETE'
   })
   .then(response => response.json())

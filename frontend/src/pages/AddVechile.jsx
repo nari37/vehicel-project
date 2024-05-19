@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import '../css/Addvechicle.css';
-
+import  serverconfig from '../config/index.js';
 
 export default function AddVehicle({setActiveLink}) {
   const [name, setVehicleName] = useState('');
@@ -20,7 +20,7 @@ export default function AddVehicle({setActiveLink}) {
 
   useEffect(() => {
     // Fetch scenario names from the JSON server
-    fetch('http://localhost:5000/api/scenariosnames')
+    fetch(`${serverconfig()}/api/scenariosnames`)
       .then(response => response.json())
       .then(data => {  
         setScenarios(data);
@@ -38,10 +38,11 @@ export default function AddVehicle({setActiveLink}) {
       return;
     }
    
-    if (initialPositionX > 0 || initialPositionX < 800) {
+    if (initialPositionX <= 0 || initialPositionX >= 800) {
       setError('Position X must be between 0 and 800.');
       return;
     }
+    
     
     setError('');
 
@@ -56,7 +57,7 @@ export default function AddVehicle({setActiveLink}) {
     };
 
     // POST request to the server
-    fetch('http://localhost:5000/api/vehiclespost', {
+    fetch(`${serverconfig()}/api/vehiclespost`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
