@@ -7,9 +7,16 @@ const fs = require('fs').promises;
 const cors = require('cors');
 const app = express();
 const PORT = 5000;
+const Path = require('path');
+
+express.static('client')
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.static('client'))
+app.use(express.static('client/static'))
+
+app.use('/',express.static(Path.join(__dirname,'client')))
 
 const readData = async (filename) => {
     try {

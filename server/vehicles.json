@@ -16,5 +16,23 @@
     "direction": "Upwards",
     "scenario": "Scenario 2",
     "id": "2"
+  },
+  {
+    "name": "hari",
+    "initialPositionX": "700",
+    "initialPositionY": "800",
+    "speed": "70",
+    "direction": "Upwards",
+    "scenario": "sinario10",
+    "id": "3"
+  },
+  {
+    "name": "balu",
+    "initialPositionX": "700",
+    "initialPositionY": "788",
+    "speed": "10",
+    "direction": "Downwards",
+    "scenario": "Senario 9",
+    "id": "4"
   }
 ]
