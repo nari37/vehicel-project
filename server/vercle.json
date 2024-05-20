@@ -8,11 +8,12 @@
       {
         "src": "client/static/**/*",
         "use": "@vercel/static-build",
-        "config": { "distDir": "client" }
+        "config": { "distDir": "client/static" }
       }
     ],
     "routes": [
-      { "src": "/api/(.*)", "dest": "/server/server.js" },
+      { "src": "/api/(.*)", "dest": "server/server.js" },
+      { "src": "/static/(.*)", "dest": "/client/static/$1" },
       { "src": "/(.*)", "dest": "/client/index.html" }
     ]
   }
