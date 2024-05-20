@@ -13,12 +13,21 @@ express.static('client')
 
 app.use(bodyParser.json());
 app.use(cors());
-// app.use(express.static('client'))
-// app.use(express.static('client/static'))
 
 // app.use('/',express.static(Path.join(__dirname,'client')))
 
+// app.use(express.static(Path.join(__dirname, '../client/index.html')));
+
+
+
+// Serve static files from the React app
 app.use(express.static(Path.join(__dirname, '../client/static')));
+
+// Catch-all handler to send back React's index.html for any request that doesn't match above
+app.get('*', (req, res) => {
+    res.sendFile(Path.join(__dirname, '../client/index.html'));
+});
+
 
 const readData = async (filename) => {
     try {
