@@ -25,9 +25,29 @@ app.get('*', (req, res) => {
 });
 
 
+// const readData = async (filename) => {
+//     try {
+//         const rawData = await fs.readFile(filename, 'utf8');
+//         return JSON.parse(rawData);
+//     } catch (error) {
+//         console.error(`Error reading ${filename}:`, error);
+//         throw error;
+//     }
+// };
+
+// const writeData = async (filename, data) => {
+//     try {
+//         await fs.writeFile(filename, JSON.stringify(data, null, 2));
+//     } catch (error) {
+//         console.error(`Error writing ${filename}:`, error);
+//         throw error;
+//     }
+// };
+
 const readData = async (filename) => {
     try {
-        const rawData = await fs.readFile(filename, 'utf8');
+        const filePath = Path.join(__dirname, filename);
+        const rawData = await fs.readFile(filePath, 'utf8');
         return JSON.parse(rawData);
     } catch (error) {
         console.error(`Error reading ${filename}:`, error);
@@ -37,12 +57,18 @@ const readData = async (filename) => {
 
 const writeData = async (filename, data) => {
     try {
-        await fs.writeFile(filename, JSON.stringify(data, null, 2));
+        const filePath = Path.join(__dirname, filename);
+        await fs.writeFile(filePath, JSON.stringify(data, null, 2));
     } catch (error) {
         console.error(`Error writing ${filename}:`, error);
         throw error;
     }
 };
+
+
+
+
+
 
 // get vehiclenames...
 app.get('/api/vehicle-names', async (req, res) => {
