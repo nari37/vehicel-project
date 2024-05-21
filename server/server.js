@@ -16,7 +16,7 @@ app.use(cors());
 
 // Serve static files from the React app...
 
-app.use(express.static(Path.join(__dirname, '../client/static')));
+app.use(express.static(Path.join(__dirname, '../client')));
 
 // Catch-all handler to send back React's index.html for any request that doesn't match above
 app.get('*', (req, res) => {
