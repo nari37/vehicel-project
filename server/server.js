@@ -6,24 +6,11 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5002;
 const Path = require('path');
-const jsonServer = require('json-server');
 
-// express.static('client')
-
-// Static file serving
-app.use(express.static('client'));
+express.static('client')
 
 app.use(bodyParser.json());
 app.use(cors());
-
-
-
-// Create json-server routers for each JSON file
-const vehiclesRouter = jsonServer.router(Path.join(__dirname, 'vehicles.json'));
-const scenariosRouter = jsonServer.router(Path.join(__dirname, 'scenarios.json'));
-
-// Configure the json-server defaults
-const jsonServerMiddlewares = jsonServer.defaults();
 
 
 
@@ -37,30 +24,9 @@ app.get('*', (req, res) => {
 });
 
 
-// const readData = async (filename) => {
-//     try {
-//         const rawData = await fs.readFile(filename, 'utf8');
-//         return JSON.parse(rawData);
-//     } catch (error) {
-//         console.error(`Error reading ${filename}:`, error);
-//         throw error;
-//     }
-// };
-
-// const writeData = async (filename, data) => {
-//     try {
-//         await fs.writeFile(filename, JSON.stringify(data, null, 2));
-//     } catch (error) {
-//         console.error(`Error writing ${filename}:`, error);
-//         throw error;
-//     }
-// };
-
-
 const readData = async (filename) => {
     try {
-        const filePath = Path.join(__dirname, filename);
-        const rawData = await fs.readFile(filePath, 'utf8');
+        const rawData = await fs.readFile(filename, 'utf8');
         return JSON.parse(rawData);
     } catch (error) {
         console.error(`Error reading ${filename}:`, error);
@@ -70,13 +36,35 @@ const readData = async (filename) => {
 
 const writeData = async (filename, data) => {
     try {
-        const filePath = Path.join(__dirname, filename);
-        await fs.writeFile(filePath, JSON.stringify(data, null, 2));
+        await fs.writeFile(filename, JSON.stringify(data, null, 2));
     } catch (error) {
         console.error(`Error writing ${filename}:`, error);
         throw error;
     }
 };
+
+
+// const readData = async (filename) => {
+//     try {
+//         const filePath = Path.join(__dirname, filename);
+//         const rawData = await fs.readFile(filePath, 'utf8');
+//         return JSON.parse(rawData);
+//     } catch (error) {
+//         console.error(`Error reading ${filename}:`, error);
+//         throw error;
+//     }
+// };
+
+
+// const writeData = async (filename, data) => {
+//     try {
+//         const filePath = Path.join(__dirname, filename);
+//         await fs.writeFile(filePath, JSON.stringify(data, null, 2));
+//     } catch (error) {
+//         console.error(`Error writing ${filename}:`, error);
+//         throw error;
+//     }
+// };
 
 
 
@@ -210,11 +198,6 @@ app.delete('/api/scenariosDelete/:id', async (req, res) => {
   }
 });
 
-
-
-// Use json-server routers and middlewares
-app.use('/api/json/vehicles', jsonServerMiddlewares, vehiclesRouter);
-app.use('/api/json/scenarios', jsonServerMiddlewares, scenariosRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
