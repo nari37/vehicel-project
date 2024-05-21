@@ -1,6 +1,4 @@
 
-
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs').promises;
@@ -8,15 +6,29 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5002;
 const Path = require('path');
+const jsonServer = require('json-server');
 
-express.static('client')
+// express.static('client')
+
+// Static file serving
+app.use(express.static('client'));
 
 app.use(bodyParser.json());
 app.use(cors());
 
 
 
-// Serve static files from the React app
+// Create json-server routers for each JSON file
+const vehiclesRouter = jsonServer.router(Path.join(__dirname, 'vehicles.json'));
+const scenariosRouter = jsonServer.router(Path.join(__dirname, 'scenarios.json'));
+
+// Configure the json-server defaults
+const jsonServerMiddlewares = jsonServer.defaults();
+
+
+
+// Serve static files from the React app...
+
 app.use(express.static(Path.join(__dirname, '../client/static')));
 
 // Catch-all handler to send back React's index.html for any request that doesn't match above
@@ -44,6 +56,7 @@ app.get('*', (req, res) => {
 //     }
 // };
 
+
 const readData = async (filename) => {
     try {
         const filePath = Path.join(__dirname, filename);
@@ -64,7 +77,6 @@ const writeData = async (filename, data) => {
         throw error;
     }
 };
-
 
 
 
@@ -93,6 +105,7 @@ app.post('/api/scenarios', async (req, res) => {
         res.status(500).json({ error: 'Error adding scenario' });
     }
 });
+
 
 // Vehicleadd...
 
@@ -132,6 +145,8 @@ app.delete('/api/delete-vehicle/:id', async (req, res) => {
         res.status(500).json({ error: 'Error deleting vehicle' });
     }
 });
+
+
 // Vehicle dataupdate....
 app.put('/api/update-vehicle-data/:id', async (req, res) => {
     try {
@@ -151,6 +166,9 @@ app.put('/api/update-vehicle-data/:id', async (req, res) => {
         res.status(500).json({ success: false, message: 'Failed to update vehicle data' });
     }
 });
+
+
+
 // Scenario data update...
 app.put('/api/update-scenarios/:id', async (req, res) => {
     try {
@@ -192,6 +210,11 @@ app.delete('/api/scenariosDelete/:id', async (req, res) => {
   }
 });
 
+
+
+// Use json-server routers and middlewares
+app.use('/api/json/vehicles', jsonServerMiddlewares, vehiclesRouter);
+app.use('/api/json/scenarios', jsonServerMiddlewares, scenariosRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
