@@ -226,12 +226,14 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-const __dirname = Path.resolve();
-app.use(express.static(Path.join(__dirname,'frontend/dist')))
 
-app.get('*',(req,res)=>{
-    res.sendFile(Path.join(__dirname, 'frontend', 'dist', 'index.html'))
-})
+// Serve static files from the frontend/dist directory
+app.use(express.static(Path.join(__dirname, 'frontend', 'dist')));
+
+// Handle any other routes and serve the frontend's index.html file
+app.get('*', (req, res) => {
+    res.sendFile(Path.join(__dirname, 'frontend', 'dist', 'index.html'));
+});
 
 
 
