@@ -216,7 +216,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs').promises;
 const cors = require('cors');
 const app = express();
-const PORT = 5002;
+const PORT = process.env.PORT || 5002;
 const Path = require('path');
 
 
@@ -226,14 +226,6 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-
-// Serve static files from the frontend/dist directory
-// app.use(express.static(Path.join(__dirname, 'frontend', 'dist')));
-
-// Handle any other routes and serve the frontend's index.html file
-// app.get('*', (req, res) => {
-//     res.sendFile(Path.join(__dirname, 'frontend', 'dist', 'index.html'));
-// });
 
 
 
